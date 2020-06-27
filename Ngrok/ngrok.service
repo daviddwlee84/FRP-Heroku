@@ -1,0 +1,11 @@
+[Unit]
+Description=Ngrok
+After=network.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ngrok start davidssh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

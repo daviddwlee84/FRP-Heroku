@@ -180,10 +180,6 @@ General
 > * [NAT traversal - Wikipedia](https://en.wikipedia.org/wiki/NAT_traversal)
 > * [Intranet Penetration - Baidu Baike](https://baike.baidu.com/item/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/8597835)
 
-Ngrok
-
-* [tunnel - How to keep ngrok running even when signing off of a server - Stack Overflow](https://stackoverflow.com/questions/50681671/how-to-keep-ngrok-running-even-when-signing-off-of-a-server)
-
 #### Deploy
 
 * [Top 5 Alternatives to Heroku | Back4App Blog](https://blog.back4app.com/heroku-alternatives/)
