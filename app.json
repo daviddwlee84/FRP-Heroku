@@ -1,0 +1,11 @@
+ 
+{
+  "name": "frp",
+  "description": "Deploy FRP to Heroku.",
+  "keywords": [
+    "frp",
+    "reverse_proxy"
+  ],
+  "repository": "https://github.com/daviddwlee84/FRP-Heroku",
+  "stack": "container"
+}
