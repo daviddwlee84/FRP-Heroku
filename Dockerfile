@@ -17,7 +17,7 @@ RUN wget https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_$
 RUN rm -rf /var/cache/apk/*
 
 # Add configuration files and scripts
-ADD frps.ini /frps/frps.ini
+# ADD frps.ini /frps/frps.ini
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
