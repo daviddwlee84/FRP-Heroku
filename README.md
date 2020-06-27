@@ -30,18 +30,22 @@ heroku login
 * [Building Docker Images with heroku.yml | Heroku Dev Center](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml)
 * [heroku.yml build manifest is now available (developer preview) | Heroku Dev Center](https://devcenter.heroku.com/changelog-items/1332)
 
-## Server - Heroku
-
 ## FRP
 
 * [fatedier/frp: A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet.](https://github.com/fatedier/frp)
 
 ### FRP Server - Heroku
 
+> This is the server you want to use as a springboard
+
 ```sh
+# Create new app
 $ heroku create david-frp-server
 Creating ⬢ david-frp-server... done
 https://david-frp-server.herokuapp.com/ | https://git.heroku.com/david-frp-server.git
+
+# Stack the app to `container`
+heroku stack:set container
 ```
 
 ```sh
@@ -49,12 +53,44 @@ https://david-frp-server.herokuapp.com/ | https://git.heroku.com/david-frp-serve
 git remote -v
 
 # Upload changes to Github
-git push origin
-# Upload changes to heroku
-git push heroku
+git push origin master
+# Upload changes to Heroku
+git push heroku master
 ```
 
+Check the logs to see if the survice is running
+
+```sh
+heroku logs --app=david-frp-servers
+```
+
+Server setting
+
 ### FRP Client - Ubuntu
+
+> This is the computer you want to connect to
+
+```sh
+# Setup binary executables
+bash get_frp_local.sh
+```
+
+Now you should be able to use `frps` and `frpc`.
+
+Change settings in `frpc.ini` to your heroku address.
+
+```sh
+# Start client
+frpc -c frpc.ini
+```
+
+## Usage
+
+Connect SSH
+
+```sh
+ssh -oPort=6000 username@heroku-ip-address
+```
 
 ## Resources
 
@@ -72,3 +108,8 @@ General
 
 > * [NAT traversal - Wikipedia](https://en.wikipedia.org/wiki/NAT_traversal)
 > * [Intranet Penetration - Baidu Baike](https://baike.baidu.com/item/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/8597835)
+
+### Other
+
+* [Keep file in a Git repo, but don't track changes - Stack Overflow](https://stackoverflow.com/questions/9794931/keep-file-in-a-git-repo-but-dont-track-changes)
+* [git - Add ignored file to repo but don't track afterwards - Stack Overflow](https://stackoverflow.com/questions/42579526/add-ignored-file-to-repo-but-dont-track-afterwards/42580327)
