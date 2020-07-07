@@ -1,11 +1,15 @@
 [Unit]
 Description=Ngrok
-After=network.service
+After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/ngrok start davidssh
-Restart=on-failure
+ExecStart=/usr/local/bin/ngrok start davidssh --config="/home/daviddwlee84/.ngrok2/ngrok.yml"
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+IgnoreSIGPIPE=true
+Restart=always
+RestartSec=3
 
 [Install]
 WantedBy=multi-user.target

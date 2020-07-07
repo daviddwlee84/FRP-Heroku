@@ -3,6 +3,6 @@ set -xeuo pipefail
 
 sudo cp ngrok.service /etc/systemd/system/ngrok.service
 
-systemctl start ngrok
 systemctl enable ngrok
+systemctl start ngrok
 systemctl status ngrok.service
