@@ -4,9 +4,9 @@ Setup [FRP server on Heroku](#frp-server---heroku) and [Client on Local (Ubuntu 
 
 **Note**:
 
-**Currently, we need two port to build communication between frps and frpc, but Heroku don't support self-defined port...**
+**Currently, we need two ports to build communication between frps and frpc, but Heroku don't support self-defined port...**
 
-## Heroku
+## Heroku (Skip this currently...)
 
 * [Heroku](https://www.heroku.com/)
   * [Account Verification | Heroku Dev Center](https://devcenter.heroku.com/articles/account-verification)
@@ -119,9 +119,9 @@ Server setting
 
 ...
 
-> If want to use the docker for Heroku, remember to add `-e PORT=7000` argument and open necessary ports (e.g. 7000, 6000)
+> If want to use the docker for Heroku *outside of Heroku*, remember to add `-e PORT=7000` argument and open necessary ports (e.g. 7000, 6000)
 
-## FRP Client - Ubuntu
+### FRP Client - Ubuntu
 
 > This is the computer you want to connect to
 
@@ -181,12 +181,9 @@ docker build -t frp .
 docker run -d -p 7000:7000 -p 6000:6000 -p 7500:7500 frp
 ```
 
-#### Using Local
+#### Using Directly
 
-```sh
-# Setup binary executables
-bash get_frp_local.sh
-```
+> Assume you already got `frps` binaries, otherwise checkout [here](#frp-client---ubuntu).
 
 ```sh
 # Start server
@@ -207,7 +204,7 @@ bash setup_frp_server_systemd.sh
 systemctl stop frps.service
 ```
 
-### Usage
+## How to Connect
 
 Connect SSH
 
@@ -217,7 +214,7 @@ ssh -oPort=6000 username@frp-server-ip-address
 ssh -p 6000 username@frp-server-ip-address
 ```
 
-#### Dashboard
+### FRP Dashboard
 
 If you setup with [FRP Server - Ubuntu](#frp-server---ubuntu)
 
@@ -236,6 +233,11 @@ Check out [here](Ngrok).
 * TeamViewer
 * [Hamachi](https://www.vpn.net/)
 
+## Todo
+
+* [ ] Open port for other services
+* [ ] Docker for `frpc`?!
+
 ## Resources
 
 ### Example
@@ -248,6 +250,10 @@ Heroku
 General
 
 * [【心得】frp內網穿透架設心得(文長,難) @Minecraft 我的世界（當個創世神） 哈啦板 - 巴哈姆特](https://m.gamer.com.tw/forum/Co.php?bsn=18673&snB=834074)
+
+Official
+
+* [通过 SSH 访问内网机器 | frp](https://gofrp.org/docs/examples/ssh/)
 
 ### Notes for Alternatives
 
