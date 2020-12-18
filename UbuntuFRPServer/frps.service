@@ -1,0 +1,15 @@
+[Unit]
+Description=FRP Server to bypass NAT Network
+Wants=network-online.target
+After=network.target
+
+[Service]
+Type=simple
+TimeoutStartSec=30
+ExecStart=/usr/local/bin/frps -c /etc/frps.ini
+ExecStop=/bin/kill $MAINPID
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy = multi-user.target

@@ -1,10 +1,10 @@
 # FRP Heroku
 
-Setup FRP server on Heroku and Client on Local (Ubuntu currently)
+Setup [FRP server on Heroku](#frp-server---heroku) and [Client on Local (Ubuntu currently)](#frp-client---ubuntu). Support [FRP server on Ubuntu](#frp-server---ubuntu) as well and [other alternatives](#alternatives).
 
-TODO:
+**Note**:
 
-Currently, we need two port to build communication between frps and frpc, but Heroku don't support self-defined port...
+**Currently, we need two port to build communication between frps and frpc, but Heroku don't support self-defined port...**
 
 ## Heroku
 
@@ -79,7 +79,7 @@ https://devcenter.heroku.com/articles/dyno-sleeping
 heroku restart web.1
 ```
 
-## FRP
+## **FRP**
 
 * [fatedier/frp: A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet.](https://github.com/fatedier/frp)
 
@@ -117,7 +117,11 @@ heroku logs --app=your-server-name
 
 Server setting
 
-### FRP Client - Ubuntu
+...
+
+> If want to use the docker for Heroku, remember to add `-e PORT=7000` argument and open necessary ports (e.g. 7000, 6000)
+
+## FRP Client - Ubuntu
 
 > This is the computer you want to connect to
 
@@ -135,12 +139,9 @@ Change settings in `frpc.ini` to your heroku address.
 frpc -c frpc.ini
 ```
 
-#### Setup Systemd Service to Auto Start on Reboot
+> better run with `tmux`
 
-> * [使用 Systemd 设置 frp 开机启动](https://notfound.cn/posts/systemd-frp/)
-> * [FRP systemd 启动脚本](https://gist.github.com/ihipop/4dc607caef7c874209521b10d18e35af)
-> * [FRP systemd 启动脚本](https://gist.github.com/imleafz/43acdb28af331d085064e3643c97be58)
-> * [frp内网穿透（linux）](https://blog.csdn.net/weixin_43800762/article/details/86536093)
+Setup Systemd Service to Auto Start on Reboot (optional but recommend)
 
 ```sh
 # Copy configure file and start frpc
@@ -152,13 +153,88 @@ bash setup_frp_client_systemd.sh
 systemctl stop frpc.service
 ```
 
-## Usage
+> * [使用 Systemd 设置 frp 开机启动](https://notfound.cn/posts/systemd-frp/)
+> * [FRP systemd 启动脚本](https://gist.github.com/ihipop/4dc607caef7c874209521b10d18e35af)
+> * [FRP systemd 启动脚本](https://gist.github.com/imleafz/43acdb28af331d085064e3643c97be58)
+> * [frp内网穿透（linux）](https://blog.csdn.net/weixin_43800762/article/details/86536093)
+
+### FRP Server - Ubuntu
+
+> This is the server you want to use as a springboard
+
+```sh
+cd UbuntuFRPServer
+```
+
+#### Using Docker
+
+> ```sh
+> # Install docker first (https://gist.github.com/daviddwlee84/9ba69aa231a19be54b6f09ae0d158683#file-install_docker-sh)
+> bash install_docker.sh
+> ```
+
+```sh
+# Build docker image
+docker build -t frp .
+
+# Run server
+docker run -d -p 7000:7000 -p 6000:6000 -p 7500:7500 frp
+```
+
+#### Using Local
+
+```sh
+# Setup binary executables
+bash get_frp_local.sh
+```
+
+```sh
+# Start server
+frps -c frps.ini
+```
+
+> better run with `tmux`
+
+#### Using Systemd Service
+
+```sh
+# Copy configure file and start frps
+bash setup_frp_server_systemd.sh
+```
+
+```sh
+# Stop service
+systemctl stop frps.service
+```
+
+### Usage
 
 Connect SSH
 
 ```sh
-ssh -oPort=6000 username@heroku-ip-address
+ssh -oPort=6000 username@frp-server-ip-address
+# equivalent
+ssh -p 6000 username@frp-server-ip-address
 ```
+
+#### Dashboard
+
+If you setup with [FRP Server - Ubuntu](#frp-server---ubuntu)
+
+Go to `http://frp-server-ip-address:7500` and login with `admin` for both account and password.
+
+## Alternatives
+
+> Expose necessary port without using FRP
+
+### Ngrok
+
+Check out [here](Ngrok).
+
+### Applications
+
+* TeamViewer
+* [Hamachi](https://www.vpn.net/)
 
 ## Resources
 
@@ -173,7 +249,7 @@ General
 
 * [【心得】frp內網穿透架設心得(文長,難) @Minecraft 我的世界（當個創世神） 哈啦板 - 巴哈姆特](https://m.gamer.com.tw/forum/Co.php?bsn=18673&snB=834074)
 
-### Alternatives
+### Notes for Alternatives
 
 #### Other Tools for Reverse Proxy / NAT Traversal / Intranet Penetration
 
