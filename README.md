@@ -204,6 +204,11 @@ bash setup_frp_server_systemd.sh
 systemctl stop frps.service
 ```
 
+```sh
+# After modify /etc/frpc.ini, restart the frpc
+systemctl restart frpc.service
+```
+
 ## How to Connect
 
 Connect SSH
