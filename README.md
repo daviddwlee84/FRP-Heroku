@@ -209,6 +209,30 @@ systemctl stop frps.service
 systemctl restart frpc.service
 ```
 
+### FRP Server & Client - Windows
+
+> Make sure you have enable script executing
+>
+> `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine` (Run as administrator)
+
+```powershell
+# Setup binary executables & Auto run FRPC at system startup (run as administrator)
+./setup_frp_windows.ps1
+
+# Check scheduled jobs
+ScheduleJob
+
+# Unregister job
+Unregister-ScheduledJob -Name FRPC
+
+
+# To kill background service (run as administrator)
+Get-Process frpc
+Stop-Process -Id xx
+```
+
+> * [PowerShell脚本开机自启动 - MuJianNanBlog](https://blog.mujiannan.me/Posts/Details/13)
+
 ## How to Connect
 
 Connect SSH
