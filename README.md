@@ -214,13 +214,21 @@ systemctl restart frpc.service
 > Make sure you have enable script executing
 >
 > `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine` (Run as administrator)
+>
+> And there is potential that Windows thinks the `frp*.exe` is a virus. This is how to configure:
+>
+> 1. Search "Virus & threat protection"
+> 2. Goto "Virus & threat protection settings" and click "Manage settings"
+> 3. Goto "Exclusions" and click "Add or remove exclusions"
+> 4. Add this folder (i.e. the repository directory) (because sometime it delete `*.zip` right away)
+> 5. Add "C:\frp" (default install path of my script)
 
 ```powershell
 # Setup binary executables & Auto run FRPC at system startup (run as administrator)
 ./setup_frp_windows.ps1
 
 # Check scheduled jobs
-ScheduleJob
+ScheduledJob
 
 # Unregister job
 Unregister-ScheduledJob -Name FRPC

@@ -11,12 +11,12 @@ Invoke-WebRequest -Uri https://github.com/fatedier/frp/releases/download/v${FRP_
 unzip .\${FRP_NAME}.zip
 # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/move-item?view=powershell-7.1
 Move-Item -Path .\${FRP_NAME} -Destination ${BIN_LOCATION}
-rm .\${FRP_NAME}.zip
+Remove-Item -Path .\${FRP_NAME}.zip
 
 # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/out-file?view=powershell-7.1
 Out-File -FilePath ${BIN_LOCATION}\frpc.ps1 -InputObject 'Start-Process -FilePath C:\frp\frpc.exe -ArgumentList "-c C:\frp\frpc.ini" -WindowStyle Hidden'
-cp .\frpc.ini ${BIN_LOCATION}
-cp .\UbuntuFRPServer\frps.ini ${BIN_LOCATION}
+Copy-Item -Path .\frpc.ini -Destination ${BIN_LOCATION}
+Copy-Item -Path .\UbuntuFRPServer\frps.ini -Destination ${BIN_LOCATION}
 
 $trigger = New-JobTrigger -AtStartup -RandomDelay 00:00:30
 Register-ScheduledJob -Trigger $trigger -FilePath ${BIN_LOCATION}\frpc.ps1 -Name FRPC
