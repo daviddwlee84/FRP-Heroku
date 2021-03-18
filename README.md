@@ -257,6 +257,21 @@ If you setup with [FRP Server - Ubuntu](#frp-server---ubuntu)
 
 Go to `http://frp-server-ip-address:7500` and login with `admin` for both account and password.
 
+### FRP Setting
+
+#### HTTP
+
+> must set either `custom_domains` or `subdomain` for *http* or *https* `custom_domains and subdomain should set at least one of them`
+> otherwise, you can just use *tcp*
+
+* [How to configure frpc.ini if my VPS without domains? · Issue #1288 · fatedier/frp](https://github.com/fatedier/frp/issues/1288)
+
+Use type `tcp`.
+
+Or set `custom_domains = { server_addr }`.
+
+> * [新手入门 - 详解 frp 内网穿透 frpc.ini 配置 - 思有云 - IOIOX](https://www.ioiox.com/archives/79.html)
+
 ## Alternatives
 
 > Expose necessary port without using FRP
@@ -270,10 +285,48 @@ Check out [here](Ngrok).
 * TeamViewer
 * [Hamachi](https://www.vpn.net/)
 
+## Other Related Network Settings
+
+### Port Forwarding
+
+#### netsh
+
+> Works in Windows
+
+```sh
+# Add
+netsh interface portproxy add v4tov4 listenaddress=localaddress listenport=localport connectaddress=destaddress connectport=destport
+# Remove
+netsh interface portproxy delete v4tov4 listenaddress=localaddress listenport=localport
+```
+
+### INI file
+
+> (TODO) seems frp doesn't support special reference parsing
+
+* [INI file - Wikipedia](https://en.wikipedia.org/wiki/INI_file)
+* [configparser — Configuration file parser — Python 3.9.2 documentation](https://docs.python.org/3/library/configparser.html)
+* [python - How to read and write INI file with Python3? - Stack Overflow](https://stackoverflow.com/questions/8884188/how-to-read-and-write-ini-file-with-python3)
+* [python - Reference variable from another ini section - Stack Overflow](https://stackoverflow.com/questions/25049276/reference-variable-from-another-ini-section/25051295#25051295)
+* [ini file - Refer variable from another ini file - Stack Overflow](https://stackoverflow.com/questions/33866444/ini-file-refer-variable-from-another-ini-file)
+
+```py
+from configparser import ConfigParser, ExtendedInterpolation
+
+config = ConfigParser(interpolation=ExtendedInterpolation())
+config.read('frpc.ini')
+config['http']['custom_domains']
+```
+
+* [Environment variables can be referenced in the configuration file, using Go's standard format](https://github.com/fatedier/frp#using-environment-variables)
+* [go-ini/ini: Package ini provides INI file read and write functionality in Go.](https://github.com/go-ini/ini)
+* [Variable reference resolution](https://github.com/gookit/ini#variable-reference-resolution)
+
 ## Todo
 
 * [ ] Open port for other services
 * [ ] Docker for `frpc`?!
+* [ ] Find if there is a way to solve reference problem of `frpc.ini` (& `http` connection as well)
 
 ## Resources
 
