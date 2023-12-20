@@ -6,6 +6,8 @@ Setup [FRP server on Heroku](#frp-server---heroku) and [Client on Local (Ubuntu 
 
 **Currently, we need two ports to build communication between frps and frpc, but Heroku don't support self-defined port...**
 
+**Additional sad news. Since November 28, 2022, Heroku no longer offers its users a free tier or free Dynos...**
+
 ## Heroku (Skip this currently...)
 
 * [Heroku](https://www.heroku.com/)
