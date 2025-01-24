@@ -1,9 +1,19 @@
 serverAddr = "x.x.x.x"   # Address of the FRP server
 serverPort = 17000       # Port of the FRP server
 
+auth.method = "token"
+auth.token = "secret_token"
+
 [[proxies]]
 name = "ssh"
 type = "tcp"
 localIP = "127.0.0.1"
 localPort = 22
 remotePort = 6000
+
+[[proxies]]
+name = "web"
+type = "http"
+localIP = "192.168.x.x"
+localPort = 8080
+remotePort = 6001
