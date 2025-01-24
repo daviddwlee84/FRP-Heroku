@@ -8,6 +8,8 @@ Setup [FRP server on Heroku](#frp-server---heroku) and [Client on Local (Ubuntu 
 
 **Additional sad news. Since November 28, 2022, Heroku no longer offers its users a free tier or free Dynos...**
 
+We were using FRP `v0.35.1` and it was using `frpc.ini` and `frps.ini`. Now we are updating to [FRP `v0.61.1`](FRP0.61.1/), it is using `frpc.toml` and `frps.toml`.
+
 ## Heroku (Skip this currently...)
 
 * [Heroku](https://www.heroku.com/)
@@ -242,6 +244,10 @@ Stop-Process -Id xx
 ```
 
 > * [PowerShell脚本开机自启动 - MuJianNanBlog](https://blog.mujiannan.me/Posts/Details/13)
+
+### FRP Client - Desktop
+
+- [luckjiawei/frpc-desktop: frp跨平台桌面客户端，可视化配置，轻松实现内网穿透！ 支持所有frp版本](https://github.com/luckjiawei/frpc-desktop)
 
 ## How to Connect
 

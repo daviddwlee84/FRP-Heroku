@@ -1,0 +1,9 @@
+serverAddr = "x.x.x.x"   # Address of the FRP server
+serverPort = 17000       # Port of the FRP server
+
+[[proxies]]
+name = "ssh"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 6000

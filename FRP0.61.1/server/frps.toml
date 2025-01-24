@@ -1,0 +1,10 @@
+bindAddr = "0.0.0.0"           # Address to bind
+bindPort = 7000                # Port to bind for client communication
+
+# https://github.com/fatedier/frp/tree/v0.61.1?tab=readme-ov-file#server-dashboard
+# The default value is 127.0.0.1. Change it to 0.0.0.0 when you want to access it from a public network.
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+# dashboard's username and password are both optional
+webServer.user = "admin"
+webServer.password = "admin"
